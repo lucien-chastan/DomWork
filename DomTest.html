@@ -1,0 +1,50 @@
+<!DOCTYPE Html> 
+<html>
+    <head>
+        <title>DOM Framework</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="author" content="Lucien CHASTAN">
+        
+		<script src="DomWork.js"></script>
+        <script type="text/javascript">
+
+            window.onload = function(){
+                
+                var myBody = _tn('body')[0];
+                
+                myBody.insertDomNode(
+                    [
+                        {
+                            type : 'div',
+                            attributs : {id:'entete', class:'divEntete'},
+                            contents : 'première div d\'entête'
+                        },
+                        {
+                            type : 'div',
+                            attributs : {id:'bloc', class:'blocAPuce'},
+                            styles : {top:'150px', left:'400px'},
+                            contents : 
+                            [
+                                {
+                                    type : 'ul',
+                                    contents : [
+                                        {type : 'li', contents : 'puce 1'},
+                                        {type : 'li', contents : 'puce 2'},
+                                        {type : 'li', contents : 'puce 3'},
+                                        {type : 'li', contents : [
+                                            {type: 'a', attributs : {href:'www.mon-lien'}, contents:'lien vers un site'}
+                                        ]}
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                );
+            }
+            
+		</script>
+	</head>
+
+    <body>
+    </body>
+</html>	
