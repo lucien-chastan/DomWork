@@ -37,7 +37,7 @@ ou
 }
 ```
 
-Ci-dessous quelques exemples de d'utilisation de la fonction `Node.insertDomNode()`
+Ci-dessous quelques exemples d'utilisation de la fonction `Node.insertDomNode()`
 
 
 ### Exemple : ajouter une div au body
