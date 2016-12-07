@@ -1,8 +1,9 @@
 <!DOCTYPE Html> 
 <html>
     <head>
-        <title>DOM Framework</title>
+        <title>Démo DomWork.Js</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="description" content="Feuille de démonstration du framework js DomWork">
         <meta name="author" content="Lucien CHASTAN">
         
 		<script src="DomWork.js"></script>
@@ -10,14 +11,15 @@
 
             window.onload = function(){
                 
-                var myBody = _tn('body')[0];
+                var myBody = byTag('body')[0];
                 
                 myBody.insertDomNode(
                     [
                         {
                             type : 'div',
                             attributs : {id:'entete', class:'divEntete'},
-                            contents : 'première div d\'entête'
+                            functions : [{event : 'click', function : function(){alert('je suis une fonction !')}, desc : false }],
+                            contents : 'première div en entête'
                         },
                         {
                             type : 'div',
@@ -28,19 +30,25 @@
                                 {
                                     type : 'ul',
                                     contents : [
-                                        {type : 'li', contents : 'puce 1'},
+                                        {type : 'li', contents : 'puce 1 (avec une fonction)', functions : [{function : function(){alert('par defaut je suis un click');}}], styles : {cursor : 'pointer'}},
                                         {type : 'li', contents : 'puce 2'},
                                         {type : 'li', contents : 'puce 3'},
                                         {type : 'li', contents : [
-                                            {type: 'a', attributs : {href:'www.mon-lien'}, contents:'lien vers un site'}
+                                            {texte : 'du texte avant puis un '},
+                                            {type: 'a', attributs : {href:'www.mon-lien'}, contents:'lien vers un site'},
+                                            {texte : ' et encore du text '},
+                                            {type : 'span', contents : [
+                                                {type: 'a', attributs : {href:'www.nouveau-lien'}, contents : 'un lien dans un span'}
+                                            ]}
                                         ]}
                                     ]
                                 }
                             ]
                         }
                     ]
-                );
+                );            
             }
+            
             
 		</script>
 	</head>

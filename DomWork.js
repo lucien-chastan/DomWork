@@ -40,10 +40,12 @@
 
 /* recherche de noeuds */
 
-    _id = function(id) {return document.getElementById(id);};
-    _tn = function(tn) {return document.getElementsByTagName(tn);};
-    _n  = function(n) {return document.getElementsByName(n);};
-    _ = function(css) {return document.querySelectorAll(css);};
+    byId = function(id) {return document.getElementById(id);};
+    byTag = function(tn) {return document.getElementsByTagName(tn);};
+    byClass = function(cl) {return document.getElementsByClassName(cl);};
+    byName  = function(n) {return document.getElementsByName(n);};
+    byQueryAll = function(css) {return document.querySelectorAll(css);};
+    byQuery = function(css) {return document.querySelector(css);};
     _cf = function() {return createDocumentFragment();};
     
     
@@ -69,6 +71,14 @@
         }
     }    
     
+    //Ajoute de fonctions au node
+    Node.prototype.AddFunctions = function(arrayFuntions){
+        for(var i in arrayFuntions){
+            var desc = !(arrayFuntions[0]['desc'])? false : arrayFuntions[0]['desc'],
+                event = !(arrayFuntions[0]['event'])? 'click' : arrayFuntions[0]['event'];
+            this.addEventListener(event, arrayFuntions[0]['function'], desc);
+        }
+    }
     
     //FONCTION D'AJOUT D'UNE ARBORESENCE DE NODE SUIVANT UN JSON
     Node.prototype.insertDomNode = function(NodeJson){
@@ -83,21 +93,27 @@
     Node.prototype.jsonLoopNode = function(NodeJson){
         for(var i = 0; i < NodeJson.length ; i++){
             
-            this.creatNode(
-                NodeJson[i]['type'],
-                NodeJson[i]['attributs'],
-                NodeJson[i]['styles'],
-                NodeJson[i]['contents']
-            );
+            if(NodeJson[i]['texte']){
+                this.creatTextElement(NodeJson[i]['texte']);
+            }else{
+                this.creatNode(
+                    NodeJson[i]['type'],
+                    NodeJson[i]['attributs'],
+                    NodeJson[i]['functions'],
+                    NodeJson[i]['styles'],
+                    NodeJson[i]['contents']
+                );
+            }
         }
     }
     
-    Node.prototype.creatNode = function(type, attributs, styles, contents){
+    Node.prototype.creatNode = function(type, attributs, functions, styles, contents){
         var element = this.createNodeElement(type);
         
         //application du style et des attributs
         element.css(styles);
         element.AddAttributes(attributs);
+        element.AddFunctions(functions);
         
         //si c'est un objet, on boucle dessus, sinon on insert le text
         if(typeof(contents) == 'object')
