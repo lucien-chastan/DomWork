@@ -22,10 +22,12 @@ Cette fonction créer dynamiquement des éléments du DOM à partir d'un tableau
 ```
 {
     type : 'balise de l'élément, div, ul, span, etc.',
-    styles : 'JSON des attributs et des valeurs, exemple :' {color : 'red', padding : '5px', fontSize : '1.2em'},
-    attributes : 'JSON des style et des valeurs, exemple :' {id : 'idDeMonBody', class : 'classDeMonBody'},
-    contents : 'contenu de l'élément',
-    functions : 'fonction à ajouter à l'élément, exemple : {[event : 'click', function : function(){alert('je suis une fonction');}]}
+    styles : 'JSON des styles et des valeurs, exemple :' {color : 'red', padding : '5px'},
+    attributes : 'JSON des attributs et des valeurs, exemple :' {id : 'idDeMonBody'},
+    contents : 'contenu de l'élément textuel ou un autre tableau JSON',
+    functions : 'fonction à ajouter à l'élément, exemple :' {
+        [event : 'click', function : function(){alert('je suis une fonction');}]
+    }
 }
 
 ou
@@ -34,8 +36,6 @@ ou
     texte : 'pour ajouter uniquement un element texte sans nœud'
 }
 ```
-
-dans le propriété contents on peut mettre un autre tableau JSON pour imbriquer les éléments
 
 Ci-dessous quelques exemples de d'utilisation de la fonction `Node.insertDomNode()`
 
@@ -54,10 +54,10 @@ monBody.insertDomNode(
             styles : {color : 'red', padding : '5px', fontSize : '1.2em'},
             attributes : {id : 'idDeMaDiv', class : 'classDeMaDiv'},
             contents : 'je suis une div dans le body',
-            functions : {[event : 'click', function : function(){alert('je suis une fonction');}]}
+            functions : [{event : 'click', function : function(){alert('je suis une fonction');}}]
         }
     ]
-)
+);
 ```
 
 ### Exemple : création d'un liste à puce
@@ -69,17 +69,15 @@ monBody.insertDomNode(
     [
         {
             type : 'ul',
-            contents : {
-                [
-                    {type:'li', contents : 'puce 1'},
-                    {type:'li', contents : 'puce 2'},
-                    {type:'li', contents : 'puce 3'},
-                    {type:'li', contents : 'puce 4'}
-                ]
-            },
+            contents : [
+                {type:'li', contents : 'puce 1'},
+                {type:'li', contents : 'puce 2'},
+                {type:'li', contents : 'puce 3'},
+                {type:'li', contents : 'puce 4'}
+            ],
         }
     ]
-)
+);
 ```
 
 ### Exemple : création d'un paragraphe avec du texte et un lien
@@ -91,14 +89,12 @@ monBody.insertDomNode(
     [
         {
             type : 'p',
-            contents : {
-                [
-                    {texte : 'du texte puis : },
-                    {type:'a', attributes : {href:'www.mon-lien.com'}, contents : 'un lien'},
-                    {texte : ' et encore du texte : }
-                ]
-            },
+            contents : [
+                {texte : 'du texte puis : ' },
+                {type:'a', attributs : {href:'www.mon-lien.com'}, contents : 'un lien'},
+                {texte : ' et encore du texte' }
+            ],
         }
     ]
-)
+);
 ```
