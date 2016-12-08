@@ -13,26 +13,26 @@ Framework Js d'aide à la manipulation du DOM
 - `byQueryAll('selecteur css')` = `document.querySelectorAll('selecteur css')`
 - `byQuery('selecteur css')` = `document.querySelector('selecteur css')`
 
-**Obtenire la hauteur et la largeur de l'écran (compatible avec IE) : **
+**Obtenire la hauteur et la largeur de l'écran (compatible avec IE) :**
 
 - `var heightEcran = windowHeight()`
 - `var widthEcran = windowWidth()`
 
-**Ajouter ou remplacer des éléments attributs sur un nœud : **
+**Ajouter ou remplacer des éléments attributs sur un nœud :**
 
 ```
 var imgId = byId('monImage');
 imgId.addAttributes({alt : 'texte altérnatif', title : 'mon title'});
 ```
 
-**Ajouter ou remplacer du style sur un nœud : **
+**Ajouter ou remplacer du style sur un nœud :**
 
 ```
 var divId = byId('maDiv');
 divId.addAttributes({color : 'rgb(50,50,50)', padding : '12px'});
 ```
 
-**Ajouter des fonctions sur un nœud : **  
+**Ajouter des fonctions sur un nœud :**  
 si le paramètre *event* n'est pas stipulé, click sera pris par defaut  
 si le paramètre *desc* n'est pas stipulé, par defaut la fonction sera ascendante, sinon mettre `desc : true`
 
