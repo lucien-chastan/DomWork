@@ -3,84 +3,92 @@
     <head>
         <title>Démo DomWork.Js</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="description" content="Feuille de démonstration du framework js DomWork">
+        <meta name="description" content="Feuille de démonstration du framework DomWork.Js">
         <meta name="author" content="Lucien CHASTAN">
         
+        <!--import du framework DomWork.js-->
 		<script src="DomWork.js"></script>
-        <script type="text/javascript">
-
-            window.onload = function(){
-                                
-                var monBody = byTag('body')[0];
-
-                //ajout d'une div au body
-                monBody.insertDomNode(
-                    [
-                        {
-                            type : 'div',
-                            styles : {color : 'red', padding : '5px', fontSize : '1.2em'},
-                            attributes : {id : 'idDeMaDiv', class : 'classDeMaDiv'},
-                            contents : 'je suis une div dans le body',
-                            functions : [{event : 'click', function : function(){alert('je suis une fonction');}}]
-                        }
-                    ]
-                );
-                
-                
-                //création d'un liste à puce
-                monBody.insertDomNode(
-                    [
-                        {
-                            type : 'ul',
-                            contents : [
-                                {type:'li', contents : 'hauteur de l\'écran : ' + windowWidth() + 'px'},
-                                {type:'li', contents : 'largeur de l\'écran : ' + windowHeight() + 'px'},
-                            ],
-                        }
-                    ]
-                );
-                
-                
-                //création d'un paragraphe avec un lien et du texte
-                monBody.insertDomNode(
-                    [
-                        {
-                            type : 'p',
-                            contents : [
-                                {texte : 'du texte puis : ' },
-                                {type : 'a', attributes : {href:'www.mon-lien.com'}, contents : 'un lien'},
-                                {texte : ' et encore du texte' }
-                            ],
-                        }
-                    ]
-                );
-                
-                // création d'une liste à puce puis changement (ou ajout) de l'attribut class sur les <li>
-                
-                monBody.insertDomNode(
-                    [
-                        {
-                            type : 'ul',
-                            attributes : {id : 'ulId'},
-                            contents : [
-                                {type:'li', contents : 'puce 1'},
-                                {type:'li', contents : 'puce 2'},
-                                {type:'li', contents : 'puce 3'},
-                                {type:'li', contents : 'puce 4'}
-                            ],
-                        }
-                    ]
-                );
-                
-                var liListe = byQueryAll('#ulId li');
-                for(var i = 0; i < liListe.length ; i++)
-                    liListe[i].addAttributes({class : 'nouvelleClass'});
-                
-            }
-            
-		</script>
 	</head>
 
     <body>
     </body>
+    
+    <script>
+
+        var monBody = byTag('body')[0];
+
+        // Ajout d'une div au body
+        monBody.insertDomNode(
+            [
+                {
+                    type : 'div',
+                    styles : {color : 'red', padding : '5px', fontSize : '1.2em'},
+                    attributes : {id : 'idDeMaDiv', class : 'classDeMaDiv'},
+                    contents : 'je suis une div dans le body',
+                    functions : [{event : 'click', function : function(){alert('je suis une fonction');}}]
+                }
+            ]
+        );
+
+
+        // Création d'un liste à puce
+        monBody.insertDomNode(
+            [
+                {
+                    type : 'ul',
+                    contents : [
+                        {type:'li', contents : 'hauteur de l\'écran : ' + windowWidth() + 'px'},
+                        {type:'li', contents : 'largeur de l\'écran : ' + windowHeight() + 'px'},
+                    ],
+                }
+            ]
+        );
+
+
+        // Création d'un paragraphe avec un lien et du texte
+        monBody.insertDomNode(
+            [
+                {
+                    type : 'p',
+                    contents : [
+                        {texte : 'du texte puis : ' },
+                        {type : 'a', attributes : {href:'www.mon-lien.com'}, contents : 'un lien'},
+                        {texte : ' et encore du texte' }
+                    ],
+                }
+            ]
+        );
+
+        // Création d'une liste à puce puis changement (ou ajout) de l'attribut class sur les <li>
+
+        monBody.insertDomNode(
+            [
+                {
+                    type : 'ul',
+                    attributes : {id : 'ulId'},
+                    contents : [
+                        {type:'li', contents : 'puce 1'},
+                        {type:'li', contents : 'puce 2'},
+                        {type:'li', contents : 'puce 3'},
+                        {type:'li', contents : 'puce 4'}
+                    ],
+                }
+            ]
+        );
+
+
+        // Liste les éléments <li> dans l'élément d'id ulId 
+        var liListe = byQueryAll('#ulId li');
+        for(var i = 0; i < liListe.length ; i++)
+            liListe[i].addAttributes({class : 'nouvelleClass'});
+
+
+        // Creer une div avec à l'interieur un fichier chargé en ajax
+        monBody.insertDomNode([
+            {type : 'div', contents : [
+                {ajax : {path : 'demoGetAjax.html'}}
+            ]}
+        ]);
+
+    </script>
 </html>	

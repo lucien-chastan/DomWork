@@ -112,6 +112,12 @@
             for(var i = 0; i < NodeJson.length ; i++){
                 if(NodeJson[i]['texte']){
                     this.creatTextElement(NodeJson[i]['texte']);
+                }else if (NodeJson[i]['ajax']){
+                    this.ajaxInnerHtml(
+                        NodeJson[i]['ajax']['path'],
+                        NodeJson[i]['ajax']['donnee'],
+                        NodeJson[i]['ajax']['methode']
+                    );
                 }else{
                     this.creatNode(
                         NodeJson[i]['type'],
@@ -148,6 +154,23 @@
         deleteNode : function(){
             var parent = this.parentNode;
             parent.removeChild(this);
+        },
+        ajaxInnerHtml : function(path, donnee = null, methode = 'get'){
+            var xhr = new XMLHttpRequest(),
+                pointInsertion = this;
+            
+            if(methode = 'get'){
+                var pathDonnee = (donnee == null)? path : path + '?' + donnee;
+                xhr.open(methode, pathDonnee, true);
+                xhr.send(null);
+            }else{
+                xhr.open(methode, path, true);
+                xhr.setRequestHeader ('Content-Type','application/x-www-form-urlencoded');
+                xhr.send(donnee);
+            }
+            xhr.onreadystatechange = function(){
+                if (xhr.readyState == 4 && xhr.status == 200) pointInsertion.innerHTML += xhr.responseText;
+            }
         }
     });
 })();

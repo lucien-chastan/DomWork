@@ -45,6 +45,15 @@ divId.addFunctions([
     ]);
 ```
 
+**Insert un fichier sur un noeud (en Ajax)**  
+Cette fonction ajoute le contenu du fichier ciblé au contenu du noeud
+la methode (get / post) et les donnees (id=....) peuvent ne pas être précisé, par defaut la méthode et get
+
+```
+var divId = byId('maDiv');
+divId.ajaxInnerHtml('monFihcier.html', 'id=1&action=false', 'get');
+
+```
 
 ## La fonction `Node.insertDomNode()`
 
@@ -128,6 +137,24 @@ monBody.insertDomNode(
                 {texte : 'du texte puis : ' },
                 {type:'a', attributes : {href:'www.mon-lien.com'}, contents : 'un lien'},
                 {texte : ' et encore du texte' }
+            ],
+        }
+    ]
+);
+```
+
+### Exemple : insertion d'une div avec pour contenu un fichier HTML chargé en ajax
+
+
+``` 
+var monBody = byTag('body')[0];
+
+monBody.insertDomNode(
+    [
+        {
+            type : 'div',
+            contents : [
+                {ajax : {path : 'monFichier.html', donne : 'id=1&nom=michel', methode : 'post'}}
             ],
         }
     ]
