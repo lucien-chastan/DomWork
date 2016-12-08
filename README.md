@@ -46,8 +46,9 @@ divId.addFunctions([
 ```
 
 **Insert un fichier sur un noeud (en Ajax)**  
-Cette fonction ajoute le contenu du fichier ciblé au contenu du noeud
-la methode (get / post) et les donnees (id=....) peuvent ne pas être précisé, par defaut la méthode et get
+Cette fonction ajoute le contenu du fichier ciblé au contenu du noeud  
+La methode (get / post) et les données (id=....) peuvent ne pas être précisées  
+Par defaut la méthode et get
 
 ```
 var divId = byId('maDiv');
