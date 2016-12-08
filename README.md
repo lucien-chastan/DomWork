@@ -25,9 +25,11 @@ Cette fonction créer dynamiquement des éléments du DOM à partir d'un tableau
     styles : 'JSON des styles et des valeurs, exemple :' {color : 'red', padding : '5px'},
     attributs : 'JSON des attributs et des valeurs, exemple :' {id : 'idDeMonBody'},
     contents : 'contenu de l'élément textuel ou un autre tableau JSON',
-    functions : 'fonction à ajouter à l'élément, exemple :' {
-        [event : 'click', function : function(){alert('je suis une fonction');}]
-    }
+    functions : 'fonction à ajouter à l'élément, exemple :' 
+        [
+            {event : 'click', function : function(){alert('je suis une fonction');}},
+            {event : 'keyup', function : function(){alert('function sur onkeyup');}}
+        ]
 }
 
 ou

@@ -26,7 +26,7 @@
     byName  = function(n) {return document.getElementsByName(n);};
     byQueryAll = function(css) {return document.querySelectorAll(css);};
     byQuery = function(css) {return document.querySelector(css);};
-    NodeFragment = function() {return document.createDocumentFragment();};
+    nodeFragment = function() {return document.createDocumentFragment();};
     
     
     //EXTENSION DE TOUTES LES CALSSES AVEC LA MÉTHODE EXTEND
@@ -40,7 +40,7 @@
     String.prototype.extend({
         left : function(n){return this.substring(0,n)},
         right : function(n){return this.substring(this.length-n)},
-        Css : function(){
+        css : function(){
             var table = this.split('-');
             for(var i = 1 ; i < table.length ; i++){
                 table[i] = table[i].capitalize();
@@ -81,15 +81,15 @@
         },
         css : function(arrayCss){
             for(var i in arrayCss){
-                this.style[i.Css()] = arrayCss[i];
+                this.style[i.css()] = arrayCss[i];
             }
         },
-        AddAttributes : function(arrayAttributes){
+        addAttributs : function(arrayAttributes){
             for(var i in arrayAttributes){
                 this.setAttribute(i,arrayAttributes[i]);
             }
         },
-        AddFunctions : function(arrayFuntions){
+        addFunctions : function(arrayFuntions){
             for(var i in arrayFuntions){
                 var desc = !(arrayFuntions[0]['desc'])? false : arrayFuntions[0]['desc'],
                     event = !(arrayFuntions[0]['event'])? 'click' : arrayFuntions[0]['event'];
@@ -97,7 +97,7 @@
             }
         },
         insertDomNode : function(NodeJson){
-            NodeFragment(); //création d'un fragment de document
+            nodeFragment(); //création d'un fragment de document
             this.jsonLoopNode(NodeJson); //boucle sur le JSON
         },
         jsonLoopNode : function(NodeJson){
@@ -119,8 +119,8 @@
             var element = this.createNodeElement(type);
 
             element.css(styles);
-            element.AddAttributes(attributs);
-            element.AddFunctions(functions);
+            element.addAttributs(attributs);
+            element.addFunctions(functions);
 
             if(typeof(contents) == 'object')
                 element.jsonLoopNode(contents);
