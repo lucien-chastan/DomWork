@@ -2,9 +2,9 @@
 
 Framework Js d'aide à la manipulation du DOM
 
-## Raccourcis de selection de nœud
+## Raccourcis de sélection & Petites fonctions
 
-Raccourcis de sélection pour pointer un des éléments du DOM (syntaxe courte mais pas trop pour quand même comprendre le code)
+**Raccourcis de sélection pour pointer un des éléments du DOM (syntaxe courte mais pas trop pour quand même comprendre le code) :**
 
 - `byId('id')` = `document.getElementById('id')`
 - `byClass('class')` = `document.getElementsByClassName('class')`
@@ -12,6 +12,39 @@ Raccourcis de sélection pour pointer un des éléments du DOM (syntaxe courte m
 - `byName('name')` = `document.getElementsByName('name')`
 - `byQueryAll('selecteur css')` = `document.querySelectorAll('selecteur css')`
 - `byQuery('selecteur css')` = `document.querySelector('selecteur css')`
+
+**Obtenire la hauteur et la largeur de l'écran (compatible avec IE) : **
+
+- `var heightEcran = windowHeight()`
+- `var widthEcran = windowWidth()`
+
+**Ajouter ou remplacer des éléments attributs sur un nœud : **
+
+```
+var imgId = byId('monImage');
+imgId.addAttributes({alt : 'texte altérnatif', title : 'mon title'});
+```
+
+**Ajouter ou remplacer du style sur un nœud : **
+
+```
+var divId = byId('maDiv');
+divId.addAttributes({color : 'rgb(50,50,50)', padding : '12px'});
+```
+
+**Ajouter des fonctions sur un nœud : **  
+si le paramètre *event* n'est pas stipulé, click sera pris par defaut  
+si le paramètre *desc* n'est pas stipulé, par defaut la fonction sera ascendante, sinon mettre `desc : true`
+
+```
+var divId = byId('maDiv');
+divId.addFunctions([
+        {event : 'click', function : maFonction},
+        {event : 'keyup', function : function(){fnAvecParametre(para1,para2);}},
+        {event : 'keydown', function : fonctionDescendante, desc : true;}}
+    ]);
+```
+
 
 ## La fonction `Node.insertDomNode()`
 
@@ -23,7 +56,7 @@ Cette fonction créer dynamiquement des éléments du DOM à partir d'un tableau
 {
     type : 'balise de l'élément, div, ul, span, etc.',
     styles : 'JSON des styles et des valeurs, exemple :' {color : 'red', padding : '5px'},
-    attributs : 'JSON des attributs et des valeurs, exemple :' {id : 'idDeMonBody'},
+    attributes : 'JSON des attributs et des valeurs, exemple :' {id : 'idDeMonBody'},
     contents : 'contenu de l'élément textuel ou un autre tableau JSON',
     functions : 'fonction à ajouter à l'élément, exemple :' 
         [
@@ -93,7 +126,7 @@ monBody.insertDomNode(
             type : 'p',
             contents : [
                 {texte : 'du texte puis : ' },
-                {type:'a', attributs : {href:'www.mon-lien.com'}, contents : 'un lien'},
+                {type:'a', attributes : {href:'www.mon-lien.com'}, contents : 'un lien'},
                 {texte : ' et encore du texte' }
             ],
         }

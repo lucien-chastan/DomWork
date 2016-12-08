@@ -1,5 +1,3 @@
-//DomWork.js
-
 (function(){
 
     //REG EXP
@@ -15,7 +13,7 @@
         phone : /^[\d\s().-]+$/,
         url : /^(http|https):\/\/[a-z0-9\-\.\/_]+\.[a-z]{2,3}$/i,
         tag : /<[^<>]+>/g , // pour rechercher toutes les occurences d'une balise HTML ou XML
-        script : /(<script).+(<\/script>)/gi, // pour rechercher toutes les occurences de script
+        script : /(<script).+(<\/script>)/gi // pour rechercher toutes les occurences de script
     };
 
     
@@ -28,67 +26,77 @@
     byQuery = function(css) {return document.querySelector(css);};
     nodeFragment = function() {return document.createDocumentFragment();};
     
+
+    // HAUTEUR ET LARGEUR D'ÉCRAN SUR TOUT LES NAVIGATEURS
+
+    // Retourne la largeur de l'écran
+    windowWidth = function (){
+        if(window.innerWidth)
+            return window.innerWidth;
+        else if (document.documentElement.clientWidth)
+            return document.documentElement.clientWidth;
+        else if(document.body.clientWidth)
+            return document.body.clientWidth;
+        else 
+            return -1;
+    }
     
-    //EXTENSION DE TOUTES LES CALSSES AVEC LA MÉTHODE EXTEND
+    // Retourne la hauteur de l'écran
+    windowHeight = function (){
+        if(window.innerHeight)
+            return window.innerHeight;
+        else if (document.documentElement.clientHeight)
+            return document.documentElement.clientHeight;
+        else if(document.body.clientHeight)
+            return document.body.clientHeight;
+        else 
+            return -1;
+    }
+    
+    // EXTENSION DE TOUTES LES CALSSES AVEC LA MÉTHODE EXTEND
     String.prototype.extend=function(obj){for( var i in obj){this[i] =obj[i]};};
     Array.prototype.extend=function(obj){for( var i in obj){this[i] =obj[i]};};
     Number.prototype.extend=function(obj){for( var i in obj){this[i] =obj[i]};};
     Node.prototype.extend=function(obj){for( var i in obj){this[i] =obj[i]};};
 
     
-    //EXTENSION DE LA CLASS STRING
+    // EXTENSION DE LA CLASS STRING
     String.prototype.extend({
         left : function(n){return this.substring(0,n)},
         right : function(n){return this.substring(this.length-n)},
         css : function(){
             var table = this.split('-');
-            for(var i = 1 ; i < table.length ; i++){
-                table[i] = table[i].capitalize();
-            }
+            for(var i = 1 ; i < table.length ; i++) table[i] = table[i].capitalize();
             return table.join('');
         },
-        capitalize: function(){
-            return this.charAt(0).toUpperCase() + this.substring(1).toLowerCase();
-        },
-        trim: function(){
-            return this.replace(/(^\s*|\s*$)/g,"")
-        }
+        capitalize: function(){return this.charAt(0).toUpperCase() + this.substring(1).toLowerCase();},
+        trim: function(){return this.replace(/(^\s*|\s*$)/g,"");}
     });
     
     
-    //EXTENSION DE LA CLASS ARRAY		
+    // EXTENSION DE LA CLASS ARRAY		
     Array.prototype.extend({
         merge : function(t){
-            for (var i =0; i< t.length;i++){
-                 this.push(t[i]);
-            }
+            for (var i =0; i< t.length;i++) this.push(t[i]);
             return this
         }
     });
     
     
-    //EXTENSION DE LA CLASS NUMBER
+    // EXTENSION DE LA CLASS NUMBER
     Number.prototype.extend({
         p : function(n){ return Math.pow(this,n)}
     });		
     
     
-    //EXTENSTION DE LA CLASS NODE
+    // EXTENSTION DE LA CLASS NODE
     Node.prototype.extend({
         changeId : function(val){
             this.id=val;
             return this;
         },
-        css : function(arrayCss){
-            for(var i in arrayCss){
-                this.style[i.css()] = arrayCss[i];
-            }
-        },
-        addAttributs : function(arrayAttributes){
-            for(var i in arrayAttributes){
-                this.setAttribute(i,arrayAttributes[i]);
-            }
-        },
+        css : function(arrayCss){for(var i in arrayCss) this.style[i.css()] = arrayCss[i];},
+        addAttributes : function(arrayAttributes){for(var i in arrayAttributes) this.setAttribute(i,arrayAttributes[i]);},
         addFunctions : function(arrayFuntions){
             for(var i in arrayFuntions){
                 var desc = !(arrayFuntions[0]['desc'])? false : arrayFuntions[0]['desc'],
@@ -97,8 +105,8 @@
             }
         },
         insertDomNode : function(NodeJson){
-            nodeFragment(); //création d'un fragment de document
-            this.jsonLoopNode(NodeJson); //boucle sur le JSON
+            nodeFragment();
+            this.jsonLoopNode(NodeJson);
         },
         jsonLoopNode : function(NodeJson){
             for(var i = 0; i < NodeJson.length ; i++){
@@ -107,7 +115,7 @@
                 }else{
                     this.creatNode(
                         NodeJson[i]['type'],
-                        NodeJson[i]['attributs'],
+                        NodeJson[i]['attributes'],
                         NodeJson[i]['functions'],
                         NodeJson[i]['styles'],
                         NodeJson[i]['contents']
@@ -119,25 +127,22 @@
             var element = this.createNodeElement(type);
 
             element.css(styles);
-            element.addAttributs(attributs);
+            element.addAttributes(attributs);
             element.addFunctions(functions);
 
-            if(typeof(contents) == 'object')
-                element.jsonLoopNode(contents);
-            else
-                element.creatTextElement(contents);
+            if(typeof(contents) == 'object') element.jsonLoopNode(contents);
+            else element.creatTextElement(contents);
+            
             return element;
         },
         createNodeElement : function(type){
             var element = document.createElement(type);
-            if(this != 'undefined')
-                this.appendChild(element);
+            if(this != 'undefined') this.appendChild(element);
             return element;
         },
         creatTextElement : function(text){
             var element = document.createTextNode(text);
-            if(this != 'undefined')
-                this.appendChild(element);
+            if(this != 'undefined') this.appendChild(element);
             return element;
         },
         deleteNode : function(){
@@ -145,7 +150,4 @@
             parent.removeChild(this);
         }
     });
-
 })();
-
- 

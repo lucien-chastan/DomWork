@@ -33,10 +33,8 @@
                         {
                             type : 'ul',
                             contents : [
-                                {type:'li', contents : 'puce 1'},
-                                {type:'li', contents : 'puce 2'},
-                                {type:'li', contents : 'puce 3'},
-                                {type:'li', contents : 'puce 4'}
+                                {type:'li', contents : 'hauteur de l\'écran : ' + windowWidth() + 'px'},
+                                {type:'li', contents : 'largeur de l\'écran : ' + windowHeight() + 'px'},
                             ],
                         }
                     ]
@@ -50,12 +48,34 @@
                             type : 'p',
                             contents : [
                                 {texte : 'du texte puis : ' },
-                                {type : 'a', attributs : {href:'www.mon-lien.com'}, contents : 'un lien'},
+                                {type : 'a', attributes : {href:'www.mon-lien.com'}, contents : 'un lien'},
                                 {texte : ' et encore du texte' }
                             ],
                         }
                     ]
                 );
+                
+                // création d'une liste à puce puis changement (ou ajout) de l'attribut class sur les <li>
+                
+                monBody.insertDomNode(
+                    [
+                        {
+                            type : 'ul',
+                            attributes : {id : 'ulId'},
+                            contents : [
+                                {type:'li', contents : 'puce 1'},
+                                {type:'li', contents : 'puce 2'},
+                                {type:'li', contents : 'puce 3'},
+                                {type:'li', contents : 'puce 4'}
+                            ],
+                        }
+                    ]
+                );
+                
+                var liListe = byQueryAll('#ulId li');
+                for(var i = 0; i < liListe.length ; i++)
+                    liListe[i].addAttributes({class : 'nouvelleClass'});
+                
             }
             
 		</script>
