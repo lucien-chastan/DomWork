@@ -115,7 +115,7 @@
                 }else if (NodeJson[i]['ajax']){
                     this.ajaxInnerHtml(
                         NodeJson[i]['ajax']['path'],
-                        NodeJson[i]['ajax']['donnee'],
+                        NodeJson[i]['ajax']['data'],
                         NodeJson[i]['ajax']['methode']
                     );
                 }else{
@@ -155,18 +155,18 @@
             var parent = this.parentNode;
             parent.removeChild(this);
         },
-        ajaxInnerHtml : function(path, donnee = null, methode = 'get'){
+        ajaxInnerHtml : function(path, data = null, methode = 'get'){
             var xhr = new XMLHttpRequest(),
                 pointInsertion = this;
             
             if(methode = 'get'){
-                var pathDonnee = (donnee == null)? path : path + '?' + donnee;
-                xhr.open(methode, pathDonnee, true);
+                var pathData = (data == null)? path : path + '?' + data;
+                xhr.open(methode, pathData, true);
                 xhr.send(null);
             }else{
                 xhr.open(methode, path, true);
                 xhr.setRequestHeader ('Content-Type','application/x-www-form-urlencoded');
-                xhr.send(donnee);
+                xhr.send(data);
             }
             xhr.onreadystatechange = function(){
                 if (xhr.readyState == 4 && xhr.status == 200) pointInsertion.innerHTML += xhr.responseText;

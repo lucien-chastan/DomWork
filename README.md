@@ -155,7 +155,7 @@ monBody.insertDomNode(
         {
             type : 'div',
             contents : [
-                {ajax : {path : 'monFichier.html', donne : 'id=1&nom=michel', methode : 'post'}}
+                {ajax : {path : 'monFichier.html', data : 'id=1&nom=michel', methode : 'post'}}
             ],
         }
     ]
