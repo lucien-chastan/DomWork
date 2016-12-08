@@ -1,6 +1,6 @@
 #DomWork
 
-Framework Js d'aide à la manipulation du DOM
+Mini framework JavaScript d'aide à la manipulation du DOM
 
 ## Raccourcis de sélection & Petites fonctions
 
