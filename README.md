@@ -29,7 +29,7 @@ imgId.addAttributes({alt : 'texte altérnatif', title : 'mon title'});
 
 ```
 var divId = byId('maDiv');
-divId.addAttributes({color : 'rgb(50,50,50)', padding : '12px'});
+divId.css({color : 'rgb(50,50,50)', padding : '12px'});
 ```
 
 **Ajouter des fonctions sur un nœud :**  
