@@ -1,0 +1,7 @@
+[    
+    {
+        type : "div",
+        attributes : {id : "divDomAjax", class : "classDomAjax"},
+        contents : "je suis une div"
+    }
+]

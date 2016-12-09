@@ -21,14 +21,14 @@ Mini framework JavaScript d'aide à la manipulation du DOM
 **Ajouter ou remplacer des éléments attributs sur un nœud :**
 
 ```
-var imgId = byId('monImage');
+var imgId = new DomWork(byId('monImage'));
 imgId.addAttributes({alt : 'texte altérnatif', title : 'mon title'});
 ```
 
 **Ajouter ou remplacer du style sur un nœud :**
 
 ```
-var divId = byId('maDiv');
+var divId = new DomWork(byId('maDiv'));
 divId.css({color : 'rgb(50,50,50)', padding : '12px'});
 ```
 
@@ -37,7 +37,7 @@ si le paramètre *event* n'est pas stipulé, click sera pris par defaut
 si le paramètre *desc* n'est pas stipulé, par defaut la fonction sera ascendante, sinon mettre `desc : true`
 
 ```
-var divId = byId('maDiv');
+var divId = new DomWork(byId('maDiv'));
 divId.addFunctions([
         {event : 'click', function : maFonction},
         {event : 'keyup', function : function(){fnAvecParametre(para1,para2);}},
@@ -47,13 +47,22 @@ divId.addFunctions([
 
 **Insert un fichier sur un noeud (en Ajax)**  
 Cette fonction ajoute le contenu du fichier ciblé au contenu du noeud  
-La methode (get / post) et les données (id=....) peuvent ne pas être précisées  
-Par defaut la méthode et get
+Si `methode` n'est pas spécifié : *'get'* sera pris par defaut  
+Si `data` n'est pas spécifié : *null* sera pris par defaut  
+Si `insertFunction` n'est pas spécifié : *innerHTML* sera pris par defaut  
+Si `async` n'est pas spécifié, par defaut la fonction sera asynchrone  
+Vous pouvez stipuler la propriété `loader` pour insérer du HTML en attendant le chargement du fichier, `loader` peut être du texte (innerHTML sera utilisé), ou du JSON (insertDomNode sera utilisé)  
 
 ```
-var divId = byId('maDiv');
-divId.ajaxInnerHtml('monFihcier.html', 'id=1&action=false', 'get');
-
+var divId = new DomWork(byId('maDiv'));
+divId.ajaxInsertHtml({
+    path : 'monFichier.html',
+    data : 'id=1&action=false',
+    methode : 'get',
+    insertFunction : 'innerHTML',
+    async : true,
+    loader : [{type : 'p', contents : 'patientez'}]
+});
 ```
 
 ## La fonction `Node.insertDomNode()`
@@ -90,7 +99,7 @@ Ci-dessous quelques exemples d'utilisation de la fonction `Node.insertDomNode()`
 Exemple simple d'ajout d'une div avec quelques éléments de style, des attributs (commme : class, id, etc.), un contenu textuel et une fonction
 
 ``` 
-var monBody = byTag('body')[0];
+var monBody = new DomWork(byTag('body')[0]new DomWork);
 
 monBody.insertDomNode(
     [
@@ -108,7 +117,7 @@ monBody.insertDomNode(
 ### Exemple : création d'un liste à puce
 
 ``` 
-var monBody = byTag('body')[0];
+var monBody = new DomWork(byTag('body')[0]);
 
 monBody.insertDomNode(
     [
@@ -128,7 +137,7 @@ monBody.insertDomNode(
 ### Exemple : création d'un paragraphe avec du texte et un lien
 
 ``` 
-var monBody = byTag('body')[0];
+var monBody = new DomWork(byTag('body')[0]);
 
 monBody.insertDomNode(
     [
@@ -148,7 +157,7 @@ monBody.insertDomNode(
 
 
 ``` 
-var monBody = byTag('body')[0];
+var monBody = new DomWork(byTag('body')[0]);
 
 monBody.insertDomNode(
     [

@@ -15,8 +15,8 @@
     
     <script>
 
-        var monBody = byTag('body')[0];
-
+        var monBody = new DomWork(byTag('body')[0]);
+        
         // Ajout d'une div au body
         monBody.insertDomNode(
             [
@@ -78,17 +78,24 @@
 
 
         // Liste les éléments <li> dans l'élément d'id ulId 
-        var liListe = byQueryAll('#ulId li');
-        for(var i = 0; i < liListe.length ; i++)
-            liListe[i].addAttributes({class : 'nouvelleClass'});
-
+        var liListe = new byQueryAll('#ulId li');
+        for(var i = 0; i < liListe.length ; i++){
+            var MyLi = new DomWork(liListe[i]);
+            MyLi.addAttributes({class : 'nouvelleClass'});
+        }
 
         // Creer une div avec à l'interieur un fichier chargé en ajax
         monBody.insertDomNode([
             {type : 'div', contents : [
-                {ajax : {path : 'demoGetAjax.html'}}
+                {ajax : {
+                    path : 'demoGetAjax.html',
+                    methode : 'get',
+                    data : null,
+                    insertFunction : 'innerHTML',
+                    loader : [{type : 'p', contents : 'patientez'}]
+                }}
             ]}
         ]);
-
+        
     </script>
 </html>	
