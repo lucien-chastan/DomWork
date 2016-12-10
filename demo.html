@@ -91,7 +91,8 @@
                     path : 'demoGetAjax.html',
                     methode : 'get',
                     data : null,
-                    insertFunction : 'innerHTML',
+                    insertMode : 'innerHTML',
+                    onload : function(){console.log('fini');},
                     loader : [{type : 'p', contents : 'patientez'}]
                 }}
             ]}

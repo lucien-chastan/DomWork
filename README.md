@@ -1,4 +1,4 @@
-#DomWork
+# DomWork
 
 Mini framework JavaScript d'aide à la manipulation du DOM
 
@@ -45,22 +45,35 @@ divId.addFunctions([
     ]);
 ```
 
-**Insert un fichier sur un noeud (en Ajax)**  
-Cette fonction ajoute le contenu du fichier ciblé au contenu du noeud  
-Si `methode` n'est pas spécifié : *'get'* sera pris par defaut  
-Si `data` n'est pas spécifié : *null* sera pris par defaut  
-Si `insertFunction` n'est pas spécifié : *innerHTML* sera pris par defaut  
-Si `async` n'est pas spécifié, par defaut la fonction sera asynchrone  
-Vous pouvez stipuler la propriété `loader` pour insérer du HTML en attendant le chargement du fichier, `loader` peut être du texte (innerHTML sera utilisé), ou du JSON (insertDomNode sera utilisé)  
+## AJAX : insertion d'un fichier sur un nœud
 
+Cette fonction ajoute le contenu du fichier ciblé au contenu d'un noeud  
+
+**Atribut obligatoire**  
+- `path` *(string)* : chemin du fichier à insérer
+
+**Atributs optionnels**  
+- `methode` *('poste' | 'get')* : methode à utiliser, valeur par defaut *get*
+- `data` *(string | null)* : données à envoyer, valeur par defaut *null*
+- `async` *(true | false)* : fonction synchrone ou asynchrone, valeur par defaut *true*
+- `insertMode` *('innerHTML' | 'insertDomNode')* : mode d'insertion des données reçues, valeur par defaut *innerHTML*
+- `loader` *(string | domJSON)* : HTML à insérer dans le noeud en attendant le chargement du fichier
+- `onload` *(function)* : fonction à executer à la fin du chargement du fichier
+- `onerror` *(function)* : fonction à executer en cas d'erreur dans le chargement (en développement)
+- `onprogress` *(function)* : fonction à executer pendant le chargement du fichier (en développement)
+
+**Exemple :**  
 ```
 var divId = new DomWork(byId('maDiv'));
 divId.ajaxInsertHtml({
     path : 'monFichier.html',
     data : 'id=1&action=false',
     methode : 'get',
-    insertFunction : 'innerHTML',
+    insertMode : 'innerHTML',
     async : true,
+    onload : function(){consol.log(fonction éxécutée à la fin du chargement)},
+    onprogress : function(){consol.log(fonction éxécutée pendant le chargement)},
+    onerror : function(){consol.log(fonction éxécutée en cas d'erreur)},
     loader : [{type : 'p', contents : 'patientez'}]
 });
 ```
