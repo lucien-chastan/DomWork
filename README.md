@@ -45,7 +45,7 @@ divId.addFunctions([
     ]);
 ```
 
-## AJAX : insertion d'un fichier sur un nœud
+## `Node.ajaxInsertHtml()` : insertion d'un fichier sur un nœud en ajax
 
 Cette fonction ajoute le contenu du fichier ciblé au contenu d'un noeud  
 
@@ -78,7 +78,7 @@ divId.ajaxInsertHtml({
 });
 ```
 
-## La fonction `Node.insertDomNode()`
+## `Node.insertDomNode()` : Création d'élément du DOM à partir d'un fichier JSON
 
 Cette fonction créer dynamiquement des éléments du DOM à partir d'un tableau JSON, les tableaux peuvent être imbriqués pour créer des nœuds imbriqués
 
