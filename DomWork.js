@@ -102,9 +102,9 @@
         addAttributes : function(arrayAttributes){for(var i in arrayAttributes) this.noeud.setAttribute(i,arrayAttributes[i]);},
         addFunctions : function(arrayFuntions){
             for(var i in arrayFuntions){
-                var desc = !(arrayFuntions[0]['desc'])? false : arrayFuntions[0]['desc'],
-                    event = !(arrayFuntions[0]['event'])? 'click' : arrayFuntions[0]['event'];
-                this.noeud.addEventListener(event, arrayFuntions[0]['function'], desc);
+                var desc = !(arrayFuntions[i]['desc'])? false : arrayFuntions[i]['desc'],
+                    event = !(arrayFuntions[i]['event'])? 'click' : arrayFuntions[i]['event'];
+                this.noeud.addEventListener(event, arrayFuntions[i]['function'], desc);
             }
         },
         insertDomNode : function(NodeJson){
