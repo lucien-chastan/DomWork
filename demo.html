@@ -98,5 +98,12 @@
             ]}
         ]);
         
+        alert(ajax({
+            path : 'demoGetAjax.html',
+            methode : 'get',
+            data : null,
+            insertMode : 'innerHTML',
+            onload : function(){console.log('fini');}
+        }));
     </script>
 </html>	

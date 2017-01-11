@@ -53,6 +53,51 @@
             return -1;
     }
     
+    //ELEMENT XHR et AJAX
+    AjaxXhr = function(){
+        var tryXhr;
+        try{tryXhr = new ActiveXObject('Msxml2.XMLHTTP');}
+        catch(e){
+            try {tryXhr = new ActiveXObject('Microsoft.XMLHTTP');}
+            catch(e){
+                try {tryXhr = new XMLHttpRequest();}
+                catch (e) {tryXhr = false;}
+            }
+        }
+        return tryXhr;
+    }
+    
+    ajax = function(tabJson){
+        var xhr = AjaxXhr(),
+            methode = (tbJson['methode'])? tbJson['methode'] : 'get',
+            data = (tbJson['data'])? tbJson['data'] : null,
+            asynchrone = !(tbJson['async'])? true : tbJson['async'],
+            insertMode = (tbJson['insertMode'])? tbJson['insertMode'] : 'innerHTML';
+
+        //onload, onprogress et onerror
+        if(tbJson['onload']) xhr.onload = tbJson['onload'];
+        if(tbJson['onprogress']) xhr.onprogress = tbJson['onprogress'];
+        if(tbJson['onerror']) xhr.onerror = tbJson['onerror'];
+
+        //ouverture du l'XMLHttpRequest
+        if(methode = 'get'){
+            var pathData = (data == null)? tbJson['path'] : tbJson['data'] + '?' + data;
+            xhr.open(methode, pathData, asynchrone);
+            xhr.send(null);
+        }else{
+            xhr.open(methode, tbJson['path'], asynchrone);
+            xhr.setRequestHeader ('Content-Type','application/x-www-form-urlencoded');
+            xhr.send(data);
+        }
+
+        //Execution à la fin du chargement
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState == 4 && xhr.status == 200){
+                return xhr.responseText;
+            }
+        }
+    }
+    
     //CLASS DomWork
     DomWork = function(noeud){this.noeud = noeud;}
     
@@ -90,7 +135,6 @@
     Number.prototype.extend({
         p : function(n){ return Math.pow(this,n)}
     });		
-    
     
     // EXTENSTION DE LA CLASS NODE
     DomWork.prototype.extend({
@@ -165,7 +209,7 @@
             parent.removeChild(this.noeud);
         },
         ajaxInsertHtml : function(tbJson){
-            var xhr = new XMLHttpRequest(),
+            var xhr = AjaxXhr(),
                 pointInsertion = this.noeud,
                 methode = (tbJson['methode'])? tbJson['methode'] : 'get',
                 data = (tbJson['data'])? tbJson['data'] : null,
@@ -202,7 +246,6 @@
                     if(insertMode == 'insertDomNode') pointInsertion.insertDomNode(xhr.responseText);
                 }
             }
-            
         }
     });
 })();
