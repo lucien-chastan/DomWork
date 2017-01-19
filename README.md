@@ -27,7 +27,7 @@ imgId.addAttributes({alt : 'texte altérnatif', title : 'mon title'});
 
 **Ajouter ou remplacer du style sur un nœud :**
 
-```
+```javascript
 var divId = new DomWork(byId('maDiv'));
 divId.css({color : 'rgb(50,50,50)', padding : '12px'});
 ```
@@ -36,7 +36,7 @@ divId.css({color : 'rgb(50,50,50)', padding : '12px'});
 si le paramètre *event* n'est pas stipulé, click sera pris par defaut  
 si le paramètre *desc* n'est pas stipulé, par defaut la fonction sera ascendante, sinon mettre `desc : true`
 
-```
+```javascript
 var divId = new DomWork(byId('maDiv'));
 divId.addFunctions([
         {event : 'click', function : maFonction},
@@ -63,7 +63,7 @@ Cette fonction ajoute le contenu du fichier ciblé au contenu d'un noeud
 - `onprogress` *(function)* : fonction à executer pendant le chargement du fichier (en développement)
 
 **Exemple :**  
-```
+```javascript
 var divId = new DomWork(byId('maDiv'));
 divId.ajaxInsertHtml({
     path : 'monFichier.html',
@@ -84,7 +84,7 @@ Cette fonction créer dynamiquement des éléments du DOM à partir d'un tableau
 
 **Structure du JSON :**
 
-```
+```javascript
 {
     type : 'balise de l'élément, div, ul, span, etc.',
     styles : 'JSON des styles et des valeurs, exemple :' {color : 'red', padding : '5px'},
@@ -111,7 +111,7 @@ Ci-dessous quelques exemples d'utilisation de la fonction `Node.insertDomNode()`
 
 Exemple simple d'ajout d'une div avec quelques éléments de style, des attributs (commme : class, id, etc.), un contenu textuel et une fonction
 
-``` 
+```javascript
 var monBody = new DomWork(byTag('body')[0]new DomWork);
 
 monBody.insertDomNode(
@@ -129,7 +129,7 @@ monBody.insertDomNode(
 
 ### Exemple : création d'un liste à puce
 
-``` 
+```javascript
 var monBody = new DomWork(byTag('body')[0]);
 
 monBody.insertDomNode(
@@ -149,7 +149,7 @@ monBody.insertDomNode(
 
 ### Exemple : création d'un paragraphe avec du texte et un lien
 
-``` 
+```javascript
 var monBody = new DomWork(byTag('body')[0]);
 
 monBody.insertDomNode(
@@ -169,7 +169,7 @@ monBody.insertDomNode(
 ### Exemple : insertion d'une div avec pour contenu un fichier HTML chargé en ajax
 
 
-``` 
+```javascript 
 var monBody = new DomWork(byTag('body')[0]);
 
 monBody.insertDomNode(
