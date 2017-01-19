@@ -20,7 +20,7 @@ Mini framework JavaScript d'aide à la manipulation du DOM
 
 **Ajouter ou remplacer des éléments attributs sur un nœud :**
 
-```
+```javascript
 var imgId = new DomWork(byId('monImage'));
 imgId.addAttributes({alt : 'texte altérnatif', title : 'mon title'});
 ```
