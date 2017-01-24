@@ -71,9 +71,9 @@ divId.ajaxInsertHtml({
     methode : 'get',
     insertMode : 'innerHTML',
     async : true,
-    onload : function(){consol.log(fonction éxécutée à la fin du chargement)},
-    onprogress : function(){consol.log(fonction éxécutée pendant le chargement)},
-    onerror : function(){consol.log(fonction éxécutée en cas d'erreur)},
+    onload : function(){consol.log("fonction éxécutée à la fin du chargement")},
+    onprogress : function(){consol.log("fonction éxécutée pendant le chargement")},
+    onerror : function(){consol.log("fonction éxécutée en cas d'erreur")},
     loader : [{type : 'p', contents : 'patientez'}]
 });
 ```
